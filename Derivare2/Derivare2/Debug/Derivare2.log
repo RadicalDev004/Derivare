@@ -1,8 +1,2 @@
 ﻿  Derivare2.cpp
-graphics.lib(dibutil.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(dibutil.obj)' or at ''; linking object as if no debug info
-graphics.lib(drawing.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(drawing.obj)' or at ''; linking object as if no debug info
-graphics.lib(file.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(file.obj)' or at ''; linking object as if no debug info
-graphics.lib(misc.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(misc.obj)' or at ''; linking object as if no debug info
-graphics.lib(winbgi.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winbgi.obj)' or at ''; linking object as if no debug info
-graphics.lib(winthread.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winthread.obj)' or at ''; linking object as if no debug info
   Derivare2.vcxproj -> C:\Users\User\Documents\GitHub\Derivare\Derivare2\Debug\Derivare2.exe
