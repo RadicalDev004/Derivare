@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArboreBInar.cpp" />
     <ClCompile Include="Derivare2.cpp" />
   </ItemGroup>
   <ItemGroup>
