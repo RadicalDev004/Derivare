@@ -1,16 +1,17 @@
 #include <iostream>
+using namespace std;
 
 class ArbNod {
 	
 public:
 	ArbNod *St, *Dr;
-	char info;
-	ArbNod(char inf)
+	string info;
+	ArbNod(string inf)
 	{
 		St = Dr = nullptr;
 		info = inf;
 	}
-	ArbNod(char inf, ArbNod *n, bool nod = 0)
+	ArbNod(string inf, ArbNod *n, bool nod = 0)
 	{
 		if(nod == 0)
 			St = n, Dr = nullptr;
@@ -19,11 +20,17 @@ public:
 
 		info = inf;
 	}
-	ArbNod(char inf, ArbNod* st, ArbNod *dr)
+	ArbNod(string inf, ArbNod* st, ArbNod *dr)
 	{
 		St = st;
 		Dr = dr;
 		info = inf;
+	}
+	ArbNod(ArbNod* copy)
+	{
+		St = copy->St;
+		Dr = copy->Dr;
+		info = copy->info;
 	}
 	bool HasChildren()
 	{
@@ -31,4 +38,9 @@ public:
 	}
 
 	static ArbNod *Temp;
+
+	bool operator == (ArbNod* other)
+	{
+		return other->St == this->St && other->Dr == this->Dr && other->info == this->info;
+	}
 };
