@@ -3,6 +3,7 @@
 #include <string>
 #include <stack>
 #include <queue>
+#include <vector>
 #include "graphics.h"
 #include "ArboreBinar.cpp"
 #pragma comment(lib,"graphics.lib")
@@ -13,12 +14,17 @@ ifstream fin("fisier.in");
 ofstream fout("fisier.out");
 
 ArbNod* ArbNod::Temp = nullptr;
+//variabile globale
+string variabila;
 
 //operatii pe arbori/expresii
 bool verificaParanteze(string expresie);
 bool verificare(string expresie);
+bool verificaSemne(string expresie);
+bool verificaSemneInvalide(string expresie);
 int prioritate(char operatorr);
 string postfixare(string expresie);
+
 
 //Derivare propriu-zisa
 void Derivare(ArbNod* oper);
@@ -31,7 +37,12 @@ void SRD(ArbNod* rad);
 int main()
 {
     string expresie;
+    fout << "Expresia matematica este: ";
     fin >> expresie;
+    fin >> variabila;
+    fout << expresie<<endl;
+    fout << "Variabila pentru care se va deriva este: " << variabila<<endl;
+  
 
     if (verificare(expresie)) {
         string arborePostfixat = postfixare(expresie);
@@ -53,9 +64,9 @@ string DerivareIndiv(string info)
 {
     if (info == "+" || info == "^" || info == "*") return info;
 
-    if (isalpha(info[0]))
+    if (info[0]==variabila[0])
         return "1";
-    if (isdigit(info[0]))
+    if (isdigit(info[0]) or isalpha(info[0]))
         return "0";
 
     return "?";
@@ -123,7 +134,9 @@ void SDR(ArbNod* rad)
 string postfixare(string expresie) {
     stack<char> stiva;
     string arborePostfixat;
+    unsigned int i = 0;
     for (char ch : expresie) {
+
         if (isdigit(ch) || isalpha(ch)) {  // daca este numar sau litera
             arborePostfixat += ch;
         }
@@ -248,7 +261,47 @@ bool verificaParanteze(std::string expresie) {
     }
     return stiva.empty();  // daca stiva este goala, parantezele sunt corecte
 }
-bool verificare(string expresie) {
-    return verificaParanteze(expresie);
-    // adauga alte verificari daca este necesar
+bool verificaSemne(string expresie)
+{
+    char semne[] = "+-*^/!";
+    for (int i=0; i<size(expresie)-1; i++)
+    {
+        if (strchr(semne, expresie[i]) and strchr(semne, expresie[i + 1]))
+        {
+            return 0;
+        }
+    }
+    if (strchr(semne, expresie[size(expresie) - 1]))
+        return 0;
+    return 1;
+}
+bool verificaSemneInvalide(string expresie)
+{
+    char semne[] = "+-*^/!.";
+    for (int i = 0; i < size(expresie); i++)
+    {
+        if (!strchr(semne, expresie[i]) or !isalpha(expresie[i]) or !isdigit(expresie[i]))
+            return 0;
+    }
+    return 1;
+}
+bool verificare(string expresie)
+{
+    bool gyatt=1;
+    if (!verificaParanteze(expresie))
+    {
+        fout << "Parantezele nu sunt corect plasate." << endl;
+        gyatt = 0;
+    }
+    if (!verificaSemne(expresie))
+    {
+        fout << "Semnele matematice nu sunt corect plasate." << endl;
+        gyatt = 0;
+    }
+    if (verificaSemneInvalide(expresie))
+    {
+        fout << "Exista semne invalide in expresie." << endl;
+        gyatt = 0;
+    }
+    return gyatt;
 }
