@@ -1,1 +1,4 @@
-﻿  Derivare2.vcxproj -> C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Debug\Derivare2.exe
+﻿  Derivare2.cpp
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(324,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(338,23): warning C4018: '<': signed/unsigned mismatch
+  Derivare2.vcxproj -> C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Debug\Derivare2.exe
