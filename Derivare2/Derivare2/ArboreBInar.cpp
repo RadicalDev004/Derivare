@@ -20,10 +20,17 @@ public:
 
 		info = inf;
 	}
-	ArbNod(string inf, ArbNod* st, ArbNod *dr)
+	ArbNod(string inf, ArbNod* st, ArbNod *dr, bool order = true)
 	{
-		St = st;
-		Dr = dr;
+		if (true) {
+			St = st;
+			Dr = dr;
+		}
+		else {
+			Dr = st;
+			St = dr;		
+		}
+		
 		info = inf;
 	}
 	ArbNod(ArbNod* copy)

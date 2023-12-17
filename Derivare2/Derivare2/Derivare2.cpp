@@ -17,6 +17,7 @@ ofstream fout("fisier.out");
 ArbNod* ArbNod::Temp = nullptr;
 //variabile globale
 string variabila;
+string OperatiiTrigonometrice[] = { "sin", "cos", "tan",  "sqrt", "log" };
 
 //operatii pe arbori/expresii
 bool verificaParanteze(string expresie);
@@ -41,12 +42,13 @@ int main()
     fout << "Expresia matematica este: ";
     fin >> expresie;
     fin >> variabila;
-    fout << expresie<<endl;
-    fout << "Variabila pentru care se va deriva este: " << variabila<<endl;
+    fout << expresie << endl;
+    fout << "Variabila pentru care se va deriva este: " << variabila << endl;
   
 
     if (verificare(expresie)) {
         string arborePostfixat = postfixare(expresie);
+        cout << arborePostfixat << '\n';
 
         SRD(ArbNod::Temp);
         
@@ -55,7 +57,7 @@ int main()
         SRD(ArbNod::Temp);
     }
     else {
-        fout << "Expresia matematica introdusa este invalida." << std::endl;
+        fout << "Expresia matematica introdusa este invalida." << endl;
     }
 
     return 0;
@@ -67,7 +69,7 @@ string DerivareIndiv(string info)
 
     if (info[0]==variabila[0])
         return "1";
-    if (isdigit(info[0]) or isalpha(info[0]))
+    if (isdigit(info[0]) or (isalpha(info[0]) && info != variabila))
         return "0";
 
     return "?";
@@ -135,69 +137,60 @@ void SDR(ArbNod* rad)
 string postfixare(string expresie)
 {
     stack<char> stiva;
+    stack<string> stivaPostfixata;
+    string temp;
+
     string arborePostfixat;
     unsigned int i = 0;
-    unsigned int k;
+    unsigned int k = 0;
     unsigned int count = 0;
-    char verificareTrigonometrica[101];
-    for (unsigned int j = 0; j<size(expresie); j++) {
-        char ch = expresie[j];
+
+    for (unsigned int j = 0; j < expresie.size(); j++) {
+        char ch = expresie.at(j);
         if (isalpha(ch)) 
         {
-            unsigned int j2 = j, aux = 0;
+            unsigned int j2 = j;
+            bool IsCorrectFunction = false;
 
-            while (isalpha(expresie[++j2])) //cat timp gaseste litere le delimiteaza in # 
-            {
-                if (aux == 0)
-                {
-                    arborePostfixat += '#';
-                    arborePostfixat += expresie[j];
-                    aux = 1;
-                    k = j; //tine minte de unde incepe #
-                }
-                arborePostfixat += expresie[j2];
+            temp = "";
+            while (j2 < expresie.size() && isalpha(expresie.at(j2))) { //cat timp gaseste litere le pune in temp
+                temp += expresie.at(j2++);
             }
-            j = j2 - 1;
-            if (aux == 1)
-            {
-                aux = 0;
-                arborePostfixat += '#';
-            }
-            char OperatiiTrigonometrice[101][101] = { "sin", "cos", "tan",  "sqrt", "log"};
-            while(arborePostfixat[k]!='#')  //verific daca ce am delimitat in * este functie trignonmetrica
-            {
-                verificareTrigonometrica[count++] += arborePostfixat[k++];
-            }
-            for (unsigned ii = 0; ii <= 4; ii++)
-            {
-                if (!strstr(OperatiiTrigonometrice[ii], verificareTrigonometrica))
-                    int o = 1;   //inca nu stiu ce sa fac daca e functie trignometrica
-            }
-
-        }
-        if (isdigit(ch)) //cat timp gaseste cifre una dupa alta le pune in forma postfixata delimitandu-le prin #
-        {
-            unsigned int j2 = j, aux=0;
             
-            while (isdigit(expresie[++j2]))
-            {
-                if (aux == 0)
+            for (int exprInd = 0; exprInd <= 4; exprInd++) { //verifica daca temp este functie
+                if (OperatiiTrigonometrice[exprInd] == temp) 
                 {
-                    arborePostfixat += '#';
-                    arborePostfixat += expresie[j];
-                    aux = 1;
+                    j = j2 - 1; //actualizam noua pozitie daca am gasit functie corecta
+                    //facem ceva cu functia
+                    IsCorrectFunction = true;
+                    stivaPostfixata.push(temp);
+
+                    arborePostfixat += temp;
+                    break;
                 }
-                arborePostfixat += expresie[j2];
+            }
+            
+            if (!IsCorrectFunction) {
+                stivaPostfixata.push(string(1, ch));
+                arborePostfixat += ch;
+            }
+        }
+        else if (isdigit(ch)) //cat timp gaseste cifre una dupa alta le pune in temp apoi in stiva postfixata
+        {
+            unsigned int j2 = j;
+            
+            temp = "";
+
+            while (j2 < expresie.size() && isdigit(expresie.at(j2))) { //cat timp gaseste cifre consecutive le pune in temp
+                temp += expresie.at(j2);
+                j2++;
             }
             j = j2 - 1;
-            if(aux == 1)
-            {
-                aux = 0;
-                arborePostfixat += '#';
-            }
-                
+            
+           
+            arborePostfixat += temp;
+            stivaPostfixata.push(temp); //plasam numarul creat in stiva postfixata
         }
-
 
         else if (ch == '(') {
             stiva.push(ch);
@@ -213,14 +206,16 @@ string postfixare(string expresie)
             while (!stiva.empty() && prioritate(ch) <= prioritate(stiva.top())) {
 
                 //daca in stringul arborelui sunt mai mult de 2 elemente inseamna ca trebuie un nou varf cu 2 fii (o operatie noua)
-                if (arborePostfixat.size() > 1) {
+                if (stivaPostfixata.size() > 1) {
+                    string dr = stivaPostfixata.top(); stivaPostfixata.pop(); 
+                    string st = stivaPostfixata.top(); stivaPostfixata.pop();
+                    cout << "new node " << stiva.top() << " " << st << " " << dr << '\n';
+
                     ArbNod* newNod = new ArbNod(
                         string(1, stiva.top()),
-                        new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 2))),
-                        new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 1)))
+                        new ArbNod(st),
+                        new ArbNod(dr)
                     );
-
-                    arborePostfixat.pop_back(); arborePostfixat.pop_back();
 
                     // Daca operatia anterioara nu e null inseamna ca trebuie sa unim 2 operatii, cea curenta si cea anterioara cu semnul de la stiva.top()
                     if (ArbNod::Temp != nullptr) {
@@ -239,15 +234,15 @@ string postfixare(string expresie)
                 else { 
                     ArbNod* newNod = new ArbNod(
                         string(1, stiva.top()),
-                        new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 1))),
+                        new ArbNod(stivaPostfixata.top()),
                         ArbNod::Temp
                     );
 
-                    arborePostfixat.pop_back();
+                    stivaPostfixata.pop();
                     ArbNod::Temp = newNod;
                 }
 
-                //arborePostfixat += stiva.top();
+                arborePostfixat += stiva.top();
                 stiva.pop();
             }
             stiva.push(ch);
@@ -256,24 +251,27 @@ string postfixare(string expresie)
     // se aplica regulile de construire de la while anterior doar ca aparent am scris invers cele 2 conditii
     while (!stiva.empty()) {
 
-        if (arborePostfixat.size() < 2) {
+        if (stivaPostfixata.size() < 2) {
             ArbNod* newNod = new ArbNod(
                 string(1, stiva.top()),
-                new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 1))),
+                new ArbNod(stivaPostfixata.top()),
                 ArbNod::Temp
             );
 
-            arborePostfixat.pop_back();
+            stivaPostfixata.pop();
             ArbNod::Temp = newNod;
         }
         else {
+            string dr = stivaPostfixata.top(); stivaPostfixata.pop();
+            string st = stivaPostfixata.top(); stivaPostfixata.pop();
+            cout << "new node " << stiva.top() << " " << st << " " << dr << '\n';
+
             ArbNod* newNod = new ArbNod(
                 string(1, stiva.top()),
-                new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 2))),
-                new ArbNod(string(1, arborePostfixat.at(arborePostfixat.size() - 1)))
+                new ArbNod(st),
+                new ArbNod(dr)
             );
 
-            arborePostfixat.pop_back(); arborePostfixat.pop_back();
 
             if (ArbNod::Temp != nullptr) {
                 stiva.pop();
@@ -288,10 +286,10 @@ string postfixare(string expresie)
                 ArbNod::Temp = newNod;
         }
 
-        //arborePostfixat += stiva.top();
+        arborePostfixat += stiva.top();
         stiva.pop();
     }
-    fout << arborePostfixat;
+    //fout << arborePostfixat;
     return arborePostfixat;
 }
 int prioritate(char operatorr) {
@@ -308,7 +306,7 @@ int prioritate(char operatorr) {
         return 0;
     }
 }
-bool verificaParanteze(std::string expresie) {
+bool verificaParanteze(string expresie) {
     std::stack<char> stiva;
     for (char ch : expresie) {
         if (ch == '(') {
