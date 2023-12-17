@@ -4,6 +4,7 @@
 #include <stack>
 #include <queue>
 #include <vector>
+#include <cmath>
 #include "graphics.h"
 #include "ArboreBinar.cpp"
 #pragma comment(lib,"graphics.lib")
@@ -131,15 +132,73 @@ void SDR(ArbNod* rad)
     if (rad->HasChildren())
         Derivare(rad);
 }
-string postfixare(string expresie) {
+string postfixare(string expresie)
+{
     stack<char> stiva;
     string arborePostfixat;
     unsigned int i = 0;
-    for (char ch : expresie) {
+    unsigned int k;
+    unsigned int count = 0;
+    char verificareTrigonometrica[101];
+    for (unsigned int j = 0; j<size(expresie); j++) {
+        char ch = expresie[j];
+        if (isalpha(ch)) 
+        {
+            unsigned int j2 = j, aux = 0;
 
-        if (isdigit(ch) || isalpha(ch)) {  // daca este numar sau litera
-            arborePostfixat += ch;
+            while (isalpha(expresie[++j2])) //cat timp gaseste litere le delimiteaza in # 
+            {
+                if (aux == 0)
+                {
+                    arborePostfixat += '#';
+                    arborePostfixat += expresie[j];
+                    aux = 1;
+                    k = j; //tine minte de unde incepe #
+                }
+                arborePostfixat += expresie[j2];
+            }
+            j = j2 - 1;
+            if (aux == 1)
+            {
+                aux = 0;
+                arborePostfixat += '#';
+            }
+            char OperatiiTrigonometrice[101][101] = { "sin", "cos", "tan",  "sqrt", "log"};
+            while(arborePostfixat[k]!='#')  //verific daca ce am delimitat in * este functie trignonmetrica
+            {
+                verificareTrigonometrica[count++] += arborePostfixat[k++];
+            }
+            for (unsigned ii = 0; ii <= 4; ii++)
+            {
+                if (!strstr(OperatiiTrigonometrice[ii], verificareTrigonometrica))
+                    int o = 1;   //inca nu stiu ce sa fac daca e functie trignometrica
+            }
+
         }
+        if (isdigit(ch)) //cat timp gaseste cifre una dupa alta le pune in forma postfixata delimitandu-le prin #
+        {
+            unsigned int j2 = j, aux=0;
+            
+            while (isdigit(expresie[++j2]))
+            {
+                if (aux == 0)
+                {
+                    arborePostfixat += '#';
+                    arborePostfixat += expresie[j];
+                    aux = 1;
+                }
+                arborePostfixat += expresie[j2];
+            }
+            j = j2 - 1;
+            if(aux == 1)
+            {
+                aux = 0;
+                arborePostfixat += '#';
+            }
+                
+        }
+
+
         else if (ch == '(') {
             stiva.push(ch);
         }
@@ -232,6 +291,7 @@ string postfixare(string expresie) {
         //arborePostfixat += stiva.top();
         stiva.pop();
     }
+    fout << arborePostfixat;
     return arborePostfixat;
 }
 int prioritate(char operatorr) {
