@@ -25,7 +25,9 @@ bool verificare(string expresie);
 bool verificaSemne(string expresie);
 bool verificaSemneInvalide(string expresie);
 int prioritate(char operatorr);
-string simplificare(string rezultat);
+string simplificare(string &rezultat);
+string simplificare0(string &rezultat);
+string simplificare1(string &rezultat);
 string postfixare(string expresie);
 
 
@@ -45,7 +47,9 @@ int main()
     fin >> variabila;
     fout << expresie << endl;
     fout << "Variabila pentru care se va deriva este: " << variabila << endl;
-  
+    string mortii = "x-0-2+3*1";
+    simplificare(mortii);
+    fout << mortii;
     if (verificare(expresie)) {
         string arborePostfixat = postfixare(expresie);
         SRD(ArbNod::Temp);
@@ -361,18 +365,39 @@ bool verificare(string expresie)
     }
     return gyatt;
 }
-string simplificare(string rezultat)
+string simplificare0(string &rezultat)
 {
     string rezultatFinal;
-    for (unsigned int i=0; i<rezultat.size(); i++)
+    for (unsigned int i = 0; i < rezultat.size(); i++)
     {
-        if (!(rezultat[i] == '+' and rezultat[i + 1] == '0'))
+        if (!((rezultat[i] == '+' or rezultat[i]=='-') and rezultat[i + 1] == '0'))
         {
             rezultatFinal += rezultat[i];
         }
         else
             i = i + 1;
     }
-    fout << rezultatFinal<<endl;
+    rezultat = rezultatFinal;
+    return rezultat;
+}
+string simplificare1(string &rezultat)
+{
+    string rezultatFinal;
+    for (unsigned int j = 0; j < rezultat.size() - 2; j++)
+    {
+        if (!((rezultat[j] == '*' or rezultat[j]=='/') and rezultat[j + 1] == '1' and !(isdigit(rezultat[j + 2]))))
+            rezultatFinal += rezultat;
+        else
+            j = j + 1;
+    }
+    rezultat = rezultatFinal;
+    return rezultatFinal;
+}
+string simplificare(string &rezultat)
+{
+    string rezultatFinal;
+    simplificare0(rezultat);
+    simplificare1(rezultat);
+
     return rezultatFinal;
 }
