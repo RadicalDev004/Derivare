@@ -15,9 +15,12 @@ ifstream fin("fisier.in");
 ofstream fout("fisier.out");
 
 ArbNod* ArbNod::Temp = nullptr;
+stack<ArbNod> ArbNod::TempStack;
 //variabile globale
 string variabila;
-string OperatiiTrigonometrice[] = { "sin", "cos", "tan",  "sqrt", "log" };
+string OperatiiTrigonometrice[] = { "sin", "cos", "tan",  "sqrt", "ln" };
+int parantezeCnt = 0;
+bool ConstHelper = false;
 
 //operatii pe arbori/expresii
 bool verificaParanteze(string expresie);
@@ -33,11 +36,18 @@ string postfixare(string expresie);
 
 //Derivare propriu-zisa
 void Derivare(ArbNod* oper);
+void Derivare2(ArbNod* oper);
 string DerivareIndiv(string info);
 
 //Parcurgere si procesare
 void SDR(ArbNod* rad);
 void SRD(ArbNod* rad);
+
+//functii ajutatoare
+bool IsNumber(string s);
+bool IsVariable(string s);
+bool IsConstant(ArbNod* oper, int c = 0);
+bool IsExpresie(string str);
 
 int main()
 {
@@ -47,14 +57,14 @@ int main()
     fin >> variabila;
     fout << expresie << endl;
     fout << "Variabila pentru care se va deriva este: " << variabila << endl;
-    string mortii = "x-0-2+3*1";
-    simplificare(mortii);
-    fout << mortii;
+
+
     if (verificare(expresie)) {
         string arborePostfixat = postfixare(expresie);
+        //fout << arborePostfixat << '\n';
         SRD(ArbNod::Temp);
-        
-        SDR(ArbNod::Temp);
+        cout << '\n';
+        Derivare2(ArbNod::Temp);
         fout << '\n';
         SRD(ArbNod::Temp);
     }
@@ -65,15 +75,224 @@ int main()
     return 0;
 }
 
+void Derivare2(ArbNod* oper)
+{
+    cout << "C" << oper->info << '\n';
+    if (!(oper->HasChildren()))
+    {
+         oper->info = DerivareIndiv(oper->info);
+         return;
+    }
+    
+    if (oper->info == "+" || oper->info == "-")
+    {
+        Derivare2(oper->St);
+        Derivare2(oper->Dr);
+    }
+    else if (oper->info == "^")
+    {
+        //cout << oper->info << " " << IsConstant(oper->St) << " " << IsConstant(oper->Dr) << '\n';
+        if (!IsConstant(oper->St) && IsConstant(oper->Dr))
+        {
+            int a = stoi(oper->Dr->info);
+            a--;
+            oper->Dr->info = to_string(stoi((oper->Dr->info)) - 1);
+
+            ArbNod* copy = new ArbNod(oper);
+            oper->Dr = copy;
+            oper->St = new ArbNod(copy->Dr);
+            oper->St->info = to_string(stoi((copy->Dr->info)) + 1);
+            oper->info = '*';
+        }
+        else if (IsConstant(oper->St) && !IsConstant(oper->Dr))
+        {
+            int a = stoi(oper->St->info);
+
+            ArbNod* copy = new ArbNod(oper);
+            oper->St = copy;
+            oper->Dr = new ArbNod("ln", new ArbNod(to_string(a)), true);
+            oper->info = '*';
+        }
+
+       
+    }
+    else if (oper->info == "*")
+    {
+        /*
+        *  fg => f`g + fg`
+        */
+        
+        //verific daca am operatii doar cu constante ca sa nu le mai derivez
+        if (IsConstant(oper->St) && IsConstant(oper->Dr))
+        {
+            oper->info = "0";
+            return;
+        }
+        else if (IsConstant(oper->St))
+        {
+            Derivare2(oper->Dr);
+            return;
+        }
+        else if (IsConstant(oper->Dr))
+        {
+            Derivare2(oper->St);
+            return;
+        }
+        
+
+        ArbNod* newSt = new ArbNod("");
+        ArbNod* newDr = new ArbNod("");
+
+        ArbNod::Copy(newSt, oper);
+        ArbNod::Copy(newDr, oper);
+
+        oper->info = "+";
+        oper->St = newSt;
+        oper->Dr = newDr;
+
+        Derivare2(newSt->St);
+        Derivare2(newDr->Dr);
+    }
+    else if (oper->info == "/")
+    {
+        /*
+        *  f/g => (f`g - fg`)/g^2
+        */
+
+        //cout << "A " << oper->info; cout << " " << IsConstant(oper->St) << " " << IsConstant(oper->Dr) << '\n';
+        //daca avem f(x)/c refacem ca f(x)*(1/c) sau daca avem c/f(x) refacem ca c*(1/f(x))
+        if (IsConstant(oper->Dr) && !IsConstant(oper->St) || !IsConstant(oper->Dr) && IsConstant(oper->St))
+        {
+            //cout << "Simple fr " << oper->St->info << " " << oper->Dr->info << '\n';
+            oper->info = "*";
+            ArbNod* drp = new ArbNod("/", new ArbNod("1"), oper->Dr);
+            oper->Dr = drp;
+            Derivare2(oper);
+            
+            return;
+        }
+
+        ArbNod* f = new ArbNod("");
+        ArbNod* g = new ArbNod("");
+
+        ArbNod* st = new ArbNod("-");
+        ArbNod* dr = new ArbNod("^");
+
+        ArbNod::Copy(f, oper->St);
+        ArbNod::Copy(g, oper->Dr);
+
+        oper->Dr = dr;
+        dr->St = g;
+        dr->Dr = new ArbNod("2");
+
+        ArbNod* templ = new ArbNod("*", f, g);
+
+        ArbNod* MinusSt = new ArbNod("");
+        ArbNod::Copy(MinusSt, templ);
+
+        ArbNod* MinusDr = new ArbNod("");
+        ArbNod::Copy(MinusDr, templ);
+
+        oper->St = st;
+        st->St = MinusSt;
+        st->Dr = MinusDr;
+
+        Derivare2(MinusSt->St);
+        Derivare2(MinusDr->Dr);
+    }
+    else if (oper->info == "sin")
+    {
+        ArbNod *cpy = new ArbNod("");
+        ArbNod::Copy(cpy, oper);
+        cpy->info = "cos";
+
+        oper->info = "*";
+        oper->St = cpy;
+
+        Derivare2(oper->Dr);
+    }
+    else if (oper->info == "cos")
+    {
+        ArbNod* cpy = new ArbNod("");
+        ArbNod::Copy(cpy, oper);
+        cpy->info = "-sin";
+
+        oper->info = "*";
+        oper->St = cpy;
+
+        Derivare2(oper->Dr);
+    }
+    else if (oper->info == "tan")
+    {
+        ArbNod* cpy = new ArbNod("");
+        ArbNod::Copy(cpy, oper);
+
+        ArbNod* cpyDr = new ArbNod("^");
+        cpy->info = "cos";
+
+        cpyDr->St = cpy;
+        cpyDr->Dr = new ArbNod("2");
+
+        oper->info = "/";
+        oper->St = new ArbNod("1");
+        oper->Dr = cpyDr;
+
+        //Derivare2(oper->Dr);
+    }
+    else if (oper->info == "sqrt")
+    {
+        ArbNod* cpy = new ArbNod("");
+        ArbNod* cpy2 = new ArbNod("");
+
+        ArbNod::Copy(cpy, oper->Dr);
+        ArbNod::Copy(cpy2, cpy);
+
+        oper->info = "*";
+        oper->St = new ArbNod("/",
+            new ArbNod("1"),
+            new ArbNod("*",
+                new ArbNod("2"),
+                new ArbNod("sqrt",
+                    cpy2,
+                    true
+                )
+            )
+        );
+        oper->Dr = cpy;
+
+
+        Derivare2(cpy);
+    }
+    else if (oper->info == "ln")
+    {
+        ArbNod* cpy = new ArbNod("");
+        ArbNod* cpy2 = new ArbNod("");
+
+        ArbNod::Copy(cpy, oper->Dr);
+        ArbNod::Copy(cpy2, cpy);
+
+        oper->info = "*";
+        oper->St = new ArbNod("/",
+            new ArbNod("1"),
+            cpy2
+        );
+        oper->Dr = cpy;
+
+
+        Derivare2(cpy);
+    }
+}
+
 string DerivareIndiv(string info)
 {
+    cout << info << '\n';
     if (info == "+" || info == "^" || info == "*") return info;
 
-    if (info[0]==variabila[0])
+    if (info == variabila)
         return "1";
-    if (isdigit(info[0]) or (isalpha(info[0]) && info != variabila))
+    if (IsNumber(info) or (!IsNumber(info) && info != variabila))
         return "0";
-
+    
     return "?";
 }
 void Derivare(ArbNod* oper)
@@ -119,11 +338,36 @@ void Derivare(ArbNod* oper)
 void SRD(ArbNod* rad)
 {
     //parcurgere inordine + afisare
+    if (rad->St != nullptr && rad->St->HasChildren() &&  (rad->info == "^" || rad->info == "/"))
+        fout << "(";
+    if (rad->St != nullptr && rad->St->HasChildren() && rad->info == "*")
+        fout << "(";
+
     if (rad->St != nullptr)
         SRD(rad->St);
+
+    if (rad->St != nullptr && rad->St->HasChildren() && (rad->info == "/" || rad->info == "^" || rad->info == "*"))
+        fout << ")";
+
+    ///RADACINA
     fout << rad->info;
+
+    if (IsExpresie(rad->info))
+        fout << "(";
+    if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "/")
+        fout << "(";
+    if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "*")
+        fout << "(";
+
     if (rad->Dr != nullptr)
         SRD(rad->Dr);
+
+    if (rad->Dr != nullptr && rad->Dr->HasChildren() && (rad->info == "^" || rad->info == "/"))
+        fout << ")";
+    if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "*")
+        fout << ")";
+    if (IsExpresie(rad->info))
+        fout << ")";
 }
 void SDR(ArbNod* rad)
 {
@@ -196,22 +440,213 @@ string postfixare(string expresie)
 
         else if (ch == '(') {
             stiva.push(ch);
+            parantezeCnt++;
         }
         else if (ch == ')') {
-            while (!stiva.empty() && stiva.top() != '(') {
-                arborePostfixat += stiva.top();
+            parantezeCnt--;
+            if (!stiva.empty() && stiva.top() == '(')
+            {
+                string var = stivaPostfixata.top(); stivaPostfixata.pop();
                 stiva.pop();
+                if (parantezeCnt > 0) {
+                    
+                    ArbNod::TempStack.push(new ArbNod(stivaPostfixata.top(), new ArbNod(var), true));
+                    cout << "DA " << stivaPostfixata.top() << " " << var << '\n';
+                    stivaPostfixata.pop();
+                    stivaPostfixata.push("temp");
+                                    
+                }
+                else
+                {
+                    if (!ArbNod::TempStack.empty() && var == "temp")
+                    {
+                       
+                        if (ArbNod::Temp != nullptr)
+                        {
+                            ArbNod* n = new ArbNod("");
+                            ArbNod::Copy(n, &ArbNod::TempStack.top());
+                            
+                            ArbNod* bn = new ArbNod(stivaPostfixata.top(), ArbNod::Temp, n);
+                            ArbNod::Temp = bn;
+
+                            stivaPostfixata.pop();
+                            ArbNod::TempStack.pop();
+                        }
+                        else
+                        {
+                            ArbNod* n = new ArbNod("");
+                            ArbNod::Copy(n, &ArbNod::TempStack.top());
+
+                            ArbNod::Temp = new ArbNod(stivaPostfixata.top(), n, true);
+
+                            stivaPostfixata.pop();
+                            ArbNod::TempStack.pop();
+                        }
+                    }
+                    else if (ArbNod::Temp == nullptr)
+                    {
+                        cout << !ArbNod::TempStack.empty() << " " << (stivaPostfixata.top() == "temp");
+                        ArbNod::Temp = new ArbNod(stivaPostfixata.top(), new ArbNod(var), true);
+                        cout << "new P12 node " << " " << stivaPostfixata.top() << " " << var << '\n';
+                        stivaPostfixata.pop();
+                    }
+                    else 
+                    {
+                        ArbNod* nd = new ArbNod(string(1, stiva.top()), ArbNod::Temp, new ArbNod(stivaPostfixata.top(), new ArbNod(var), true));
+                        ArbNod::Temp = nd;
+                        stiva.pop();
+                        stivaPostfixata.pop();
+                        
+                    }
+                }
+                continue;
             }
-            stiva.pop();  // elimina '('
+            while (!stiva.empty() && stiva.top() != '(') {
+
+                if (stivaPostfixata.size() > 1) {
+                    
+                    ArbNod *dr = new ArbNod("");
+                    if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                        ArbNod::Copy(dr, &ArbNod::TempStack.top());
+                        ArbNod::TempStack.pop();
+                        stivaPostfixata.pop();
+                    }
+                    else if (!stivaPostfixata.empty() && IsExpresie(stivaPostfixata.top())) {                     
+                        ArbNod::Copy(dr, &ArbNod::TempStack.top());
+                        ArbNod* tmp = new ArbNod(stivaPostfixata.top(), dr, true);
+                        dr = tmp;
+                        ArbNod::TempStack.pop();
+                        stivaPostfixata.pop();
+                    }
+                    else {
+                        dr = new ArbNod(stivaPostfixata.top());
+                        stivaPostfixata.pop();
+                    }
+
+                    ArbNod *st = new ArbNod("");
+                    if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                        ArbNod::Copy(st, &ArbNod::TempStack.top());
+                        ArbNod::TempStack.pop();
+                        stivaPostfixata.pop();
+                    }
+                    else if (!stivaPostfixata.empty() && IsExpresie(stivaPostfixata.top())) {
+                        st = nullptr;
+                    }
+                    else {
+                        st = new ArbNod(stivaPostfixata.top());
+                        stivaPostfixata.pop();
+                    }
+                    cout << "new P1 node " << " " << stiva.top() << " " << ((st != nullptr) ? st->info : "LOL") << " " << dr->info << " " << '\n';
+
+                    ArbNod* newNod = new ArbNod(
+                        st == nullptr && !stivaPostfixata.empty() && IsExpresie(stivaPostfixata.top()) ? stivaPostfixata.top() : string(1, stiva.top()),
+                        st,
+                        dr
+                    );
+
+                    if (st == nullptr && !stivaPostfixata.empty() && IsExpresie(stivaPostfixata.top())) stivaPostfixata.pop();
+
+                    if (parantezeCnt > 0) {
+                        ArbNod::TempStack.push(newNod);
+                        stivaPostfixata.push("temp");
+                    }
+                    else {
+                        if (!stivaPostfixata.empty() && IsExpresie(stivaPostfixata.top()))
+                        {
+                            stiva.pop();
+                            if (stiva.top() == '(')
+                                stiva.pop();
+
+                            if (ArbNod::Temp != nullptr) {
+                                ArbNod* nd = new ArbNod(string(1, stiva.top()), ArbNod::Temp, new ArbNod(stivaPostfixata.top(), newNod, true));
+                                ArbNod::Temp = nd;
+
+                            }
+                            else {
+                                ArbNod::Temp = new ArbNod(stivaPostfixata.top(), newNod, true);
+                                cout << "new P13 node " << stivaPostfixata.top() << " " << stiva.top() << " " << ((st != nullptr) ? st->info : "LOL") << " " << dr->info << " " << '\n';
+                                stiva.push('?');
+                            }
+                            stivaPostfixata.pop();
+                        }
+                        // Daca operatia anterioara nu e null inseamna ca trebuie sa unim 2 operatii, cea curenta si cea anterioara cu semnul de la stiva.top()
+                        else if (ArbNod::Temp != nullptr) {
+
+                            stiva.pop();
+                            if (stiva.top() == '(')
+                                stiva.pop();
+
+                            ArbNod* tp = new ArbNod(
+                                string(1, stiva.top()),
+                                newNod,
+                                ArbNod::Temp,
+                                false
+                            );
+                            ArbNod::Temp = tp;
+                        }
+                        else
+                            ArbNod::Temp = newNod;
+                    }
+
+                    
+                }
+                //altfel inseamna ca a ramas un singur element care trebuie pus in operatie cu operatia anterioara
+                else {
+                    if (stiva.empty())
+                    {
+                        cout << "emptyStiva\n" << arborePostfixat;
+                        return "";
+                    }
+                    if (stivaPostfixata.empty())
+                    {
+                        cout << "emptyStivaP\n" << arborePostfixat;
+                        return "";
+                    }
+                    ArbNod* newNod = new ArbNod(
+                        string(1, stiva.top()),
+                        new ArbNod(stivaPostfixata.top()),
+                        ArbNod::Temp
+                    );
+
+                    if (!stivaPostfixata.empty())
+                        stivaPostfixata.pop();
+                    ArbNod::Temp = newNod;
+                }
+                if (!stiva.empty())
+                arborePostfixat += stiva.top();
+
+                if (!stiva.empty())
+                    stiva.pop();
+            }
+            if (!stiva.empty())
+                stiva.pop();
+            // elimina '('              
         }
         else {  // daca este operator
             while (!stiva.empty() && prioritate(ch) <= prioritate(stiva.top())) {
 
                 //daca in stringul arborelui sunt mai mult de 2 elemente inseamna ca trebuie un nou varf cu 2 fii (o operatie noua)
                 if (stivaPostfixata.size() > 1) {
-                    string dr = stivaPostfixata.top(); stivaPostfixata.pop(); 
-                    string st = stivaPostfixata.top(); stivaPostfixata.pop();
-                    cout << "new node " << stiva.top() << " " << st << " " << dr << '\n';
+                    ArbNod* dr = new ArbNod("");
+                    if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                        ArbNod::Copy(dr, &ArbNod::TempStack.top());
+                        ArbNod::TempStack.pop();
+                    }
+                    else {
+                        dr = new ArbNod(stivaPostfixata.top());
+                        stivaPostfixata.pop();
+                    }
+
+                    ArbNod* st = new ArbNod("");
+                    if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                        ArbNod::Copy(st, &ArbNod::TempStack.top());
+                        ArbNod::TempStack.pop();
+                    }
+                    else {
+                        st = new ArbNod(stivaPostfixata.top());
+                        stivaPostfixata.pop();
+                    }
+                    cout << "new N node " << stiva.top() << " " << ((st != nullptr) ? st->info : "LOL") << " " << dr->info << '\n';
 
                     ArbNod* newNod = new ArbNod(
                         string(1, stiva.top()),
@@ -252,21 +687,28 @@ string postfixare(string expresie)
     }
     // se aplica regulile de construire de la while anterior doar ca aparent am scris invers cele 2 conditii
     while (!stiva.empty()) {
+        cout << stivaPostfixata.size();
+        if (stivaPostfixata.size() > 1) {
+            ArbNod* dr = new ArbNod("");
+            if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                ArbNod::Copy(dr, &ArbNod::TempStack.top());
+                ArbNod::TempStack.pop();
+            }
+            else {
+                dr = new ArbNod(stivaPostfixata.top());
+                stivaPostfixata.pop();
+            }
 
-        if (stivaPostfixata.size() < 2) {
-            ArbNod* newNod = new ArbNod(
-                string(1, stiva.top()),
-                new ArbNod(stivaPostfixata.top()),
-                ArbNod::Temp
-            );
-
-            stivaPostfixata.pop();
-            ArbNod::Temp = newNod;
-        }
-        else {
-            string dr = stivaPostfixata.top(); stivaPostfixata.pop();
-            string st = stivaPostfixata.top(); stivaPostfixata.pop();
-            cout << "new node " << stiva.top() << " " << st << " " << dr << '\n';
+            ArbNod* st = new ArbNod("");
+            if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
+                ArbNod::Copy(st, &ArbNod::TempStack.top());
+                ArbNod::TempStack.pop();
+            }
+            else {
+                st = new ArbNod(stivaPostfixata.top());
+                stivaPostfixata.pop();
+            }
+            cout << "new L node " << stiva.top() << " " << ((st != nullptr) ? st->info : "LOL") << " " << dr->info << '\n';
 
             ArbNod* newNod = new ArbNod(
                 string(1, stiva.top()),
@@ -274,7 +716,7 @@ string postfixare(string expresie)
                 new ArbNod(dr)
             );
 
-
+            // Daca operatia anterioara nu e null inseamna ca trebuie sa unim 2 operatii, cea curenta si cea anterioara cu semnul de la stiva.top()
             if (ArbNod::Temp != nullptr) {
                 stiva.pop();
                 ArbNod* tp = new ArbNod(
@@ -287,10 +729,22 @@ string postfixare(string expresie)
             else
                 ArbNod::Temp = newNod;
         }
+        //altfel inseamna ca a ramas un singur element care trebuie pus in operatie cu operatia anterioara
+        else {
+            ArbNod* newNod = new ArbNod(
+                string(1, stiva.top()),
+                new ArbNod(stivaPostfixata.top()),
+                ArbNod::Temp
+            );
+            cout << "new L1 node " << stiva.top() << " " << stivaPostfixata.top() << " " << ArbNod::Temp->info << '\n';
+            stivaPostfixata.pop();
+            ArbNod::Temp = newNod;
+        }
 
         arborePostfixat += stiva.top();
         stiva.pop();
     }
+
     //fout << arborePostfixat;
     return arborePostfixat;
 }
@@ -309,7 +763,7 @@ int prioritate(char operatorr) {
     }
 }
 bool verificaParanteze(string expresie) {
-    std::stack<char> stiva;
+    stack<char> stiva;
     for (char ch : expresie) {
         if (ch == '(') {
             stiva.push(ch);
@@ -401,3 +855,38 @@ string simplificare(string &rezultat)
 
     return rezultatFinal;
 }
+bool IsNumber(string s)
+{
+    for (char c : s)
+        if (!isdigit(c))
+            return false;
+    return true;
+}
+bool IsVariable(string s)
+{
+    for (char c : s)
+        if (!isalpha(c))
+            return false;
+    return true;
+}
+bool IsConstant(ArbNod* oper, int c) 
+{
+    if (c == 0) ConstHelper = true;
+
+    if (IsVariable(oper->info)) {
+        ConstHelper = false;
+    }
+    if (oper->St != nullptr) IsConstant(oper->St, c + 1);
+    if (oper->Dr != nullptr) IsConstant(oper->Dr, c + 1);
+    if (c == 0) {
+        return ConstHelper;
+    }
+}
+bool IsExpresie(string str)
+{
+    for (string s : OperatiiTrigonometrice)
+        if (s == str)
+            return true;
+    return false;
+}
+
