@@ -17,10 +17,12 @@ ofstream fout("fisier.out");
 ArbNod* ArbNod::Temp = nullptr;
 stack<ArbNod> ArbNod::TempStack;
 //variabile globale
+string expresie;
 string variabila;
 string OperatiiTrigonometrice[] = { "sin", "cos", "tan",  "sqrt", "ln" };
 int parantezeCnt = 0;
 bool ConstHelper = false;
+string DerivataNesimplificata;
 
 //operatii pe arbori/expresii
 bool verificaParanteze(string expresie);
@@ -28,9 +30,9 @@ bool verificare(string expresie);
 bool verificaSemne(string expresie);
 bool verificaSemneInvalide(string expresie);
 int prioritate(char operatorr);
-string simplificare(string &rezultat);
-string simplificare0(string &rezultat);
-string simplificare1(string &rezultat);
+string simplificare(string rezultat);
+void simplificare0(string &rezultat);
+void simplificare1(string &rezultat);
 string postfixare(string expresie);
 
 
@@ -51,7 +53,6 @@ bool IsExpresie(string str);
 
 int main()
 {
-    string expresie;
     fout << "Expresia matematica este: ";
     fin >> expresie;
     fin >> variabila;
@@ -71,7 +72,9 @@ int main()
     else {
         fout << "Expresia matematica introdusa este invalida." << endl;
     }
+    
 
+    fout<< simplificare(DerivataNesimplificata);
     return 0;
 }
 
@@ -338,36 +341,63 @@ void Derivare(ArbNod* oper)
 void SRD(ArbNod* rad)
 {
     //parcurgere inordine + afisare
-    if (rad->St != nullptr && rad->St->HasChildren() &&  (rad->info == "^" || rad->info == "/"))
-        fout << "(";
+    if (rad->St != nullptr && rad->St->HasChildren() && (rad->info == "^" || rad->info == "/"))
+    {
+        DerivataNesimplificata += '(';
+    }
     if (rad->St != nullptr && rad->St->HasChildren() && rad->info == "*")
-        fout << "(";
+    {
+        
+        DerivataNesimplificata += '(';
+    }
 
     if (rad->St != nullptr)
         SRD(rad->St);
 
     if (rad->St != nullptr && rad->St->HasChildren() && (rad->info == "/" || rad->info == "^" || rad->info == "*"))
-        fout << ")";
+    {
+        
+        DerivataNesimplificata += ')';
+    }
 
     ///RADACINA
-    fout << rad->info;
+    DerivataNesimplificata += rad->info;
+    
 
     if (IsExpresie(rad->info))
-        fout << "(";
+    {
+        DerivataNesimplificata += '(';
+       
+    }
     if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "/")
-        fout << "(";
+    {
+        DerivataNesimplificata += '(';
+        
+    }
     if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "*")
-        fout << "(";
+    {
+        DerivataNesimplificata += '(';
+       
+    }
 
     if (rad->Dr != nullptr)
         SRD(rad->Dr);
 
     if (rad->Dr != nullptr && rad->Dr->HasChildren() && (rad->info == "^" || rad->info == "/"))
-        fout << ")";
+    {
+        
+        DerivataNesimplificata += ')';
+    }
     if (rad->Dr != nullptr && rad->Dr->HasChildren() && rad->info == "*")
-        fout << ")";
+    {
+        
+    DerivataNesimplificata += ')';
+    }
     if (IsExpresie(rad->info))
-        fout << ")";
+    {
+        
+        DerivataNesimplificata += ')';
+    }
 }
 void SDR(ArbNod* rad)
 {
@@ -819,11 +849,16 @@ bool verificare(string expresie)
     }
     return gyatt;
 }
-string simplificare0(string &rezultat)
+void simplificare0(string &rezultat)
 {
     string rezultatFinal;
     for (unsigned int i = 0; i < rezultat.size(); i++)
     {
+            if (rezultat[i] == '0' and rezultat[i + 1] == '+')
+            {
+                i = i + 1;
+                continue;
+            }
         if (!((rezultat[i] == '+' or rezultat[i]=='-') and rezultat[i + 1] == '0'))
         {
             rezultatFinal += rezultat[i];
@@ -832,29 +867,43 @@ string simplificare0(string &rezultat)
             i = i + 1;
     }
     rezultat = rezultatFinal;
-    return rezultat;
 }
-string simplificare1(string &rezultat)
+void simplificare1(string &rezultat)
 {
-    string rezultatFinal;
-    for (unsigned int j = 0; j < rezultat.size() - 2; j++)
+    string RezultatFinal;
+    for (int i = 0; i <= rezultat.size()-1; i++)
     {
-        if (!((rezultat[j] == '*' or rezultat[j]=='/') and rezultat[j + 1] == '1' and !(isdigit(rezultat[j + 2]))))
-            rezultatFinal += rezultat;
+        if (rezultat[i] == '1')
+        {
+            if (rezultat[i + 1] == '*')
+            {
+                i++;
+                continue;
+            }
+        }
         else
-            j = j + 1;
+            if ((rezultat[i] == '*' or rezultat[i] == '/') and rezultat[i + 1] == '1')
+            {
+                i++;
+                continue;
+            }
+        RezultatFinal += rezultat[i];
     }
-    rezultat = rezultatFinal;
-    return rezultatFinal;
+    rezultat = RezultatFinal;
 }
-string simplificare(string &rezultat)
+string simplificare(string rezultat)
 {
-    string rezultatFinal;
-    simplificare0(rezultat);
-    simplificare1(rezultat);
-
-    return rezultatFinal;
+    string DerivataSimplificata;
+    for (int i = expresie.size(); i < DerivataNesimplificata.size(); i++)
+    {
+        DerivataSimplificata += DerivataNesimplificata[i];
+    }
+    simplificare0(DerivataSimplificata);
+    simplificare1(DerivataSimplificata);
+    
+    return DerivataSimplificata;
 }
+
 bool IsNumber(string s)
 {
     for (char c : s)

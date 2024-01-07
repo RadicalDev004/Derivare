@@ -1,5 +1,7 @@
 ﻿  Derivare2.cpp
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(781,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(795,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(884): warning C4715: 'IsConstant': not all control paths return a value
-  Derivare2.vcxproj -> C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Debug\Derivare2.exe
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(811,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(825,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(874,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(897,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(933): warning C4715: 'IsConstant': not all control paths return a value
+  Derivare2.vcxproj -> C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Debug\Derivare2.exe

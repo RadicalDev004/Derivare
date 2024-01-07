@@ -1,4 +1,4 @@
-Expresia matematica este: x+ln(x^2)
+Expresia matematica este: x*5+x+ln(x^2)+1+x*4+6+6
 Variabila pentru care se va deriva este: x
-x+ln(x^2)
-1+(1/(x^2))*(2*(x^1))
+
+4+1+5+(1/(x^2))*(2*(x^1))
