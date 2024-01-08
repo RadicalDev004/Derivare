@@ -50,6 +50,7 @@ bool IsNumber(string s);
 bool IsVariable(string s);
 bool IsConstant(ArbNod* oper, int c = 0);
 bool IsExpresie(string str);
+bool debug(string expr);
 
 int main()
 {
@@ -58,6 +59,8 @@ int main()
     fin >> variabila;
     fout << expresie << endl;
     fout << "Variabila pentru care se va deriva este: " << variabila << endl;
+    if (debug(expresie))
+        return 0;
 
 
     if (verificare(expresie)) {
@@ -902,6 +905,16 @@ string simplificare(string rezultat)
     simplificare1(DerivataSimplificata);
     
     return DerivataSimplificata;
+}
+bool debug(string expr)
+{
+    if (expr.size() == 1 and expr[0] == variabila[0])
+    {
+        fout << 1;
+        return 1;
+    }
+    return 0;
+
 }
 
 bool IsNumber(string s)
