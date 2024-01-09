@@ -25,16 +25,8 @@ bool ConstHelper = false;
 string DerivataNesimplificata;
 
 //operatii pe arbori/expresii
-bool verificaParanteze(string expresie);
-bool verificare(string expresie);
-bool verificaSemne(string expresie);
 bool verificaSemneInvalide(string expresie);
-int prioritate(char operatorr);
-string simplificare(string rezultat);
-void simplificare0(string &rezultat);
-void simplificare1(string &rezultat);
 string postfixare(string expresie);
-
 
 //Derivare propriu-zisa
 void Derivare(ArbNod* oper);
@@ -46,11 +38,19 @@ void SDR(ArbNod* rad);
 void SRD(ArbNod* rad);
 
 //functii ajutatoare
+int prioritate(char operatorr);
+bool verificaParanteze(string expresie);
+bool verificare(string expresie);
+bool verificaSemne(string expresie);
+string simplificare(string rezultat);
+void simplificare0(string& rezultat);
+void simplificare1(string& rezultat);
 bool IsNumber(string s);
 bool IsVariable(string s);
 bool IsConstant(ArbNod* oper, int c = 0);
 bool IsExpresie(string str);
 bool debug(string expr);
+
 
 int main()
 {
@@ -62,12 +62,12 @@ int main()
     if (debug(expresie))
         return 0;
 
-
     if (verificare(expresie)) {
         string arborePostfixat = postfixare(expresie);
         //fout << arborePostfixat << '\n';
         SRD(ArbNod::Temp);
-        cout << '\n';
+        fout << DerivataNesimplificata;
+        fout << '\n';
         Derivare2(ArbNod::Temp);
         fout << '\n';
         SRD(ArbNod::Temp);
@@ -83,7 +83,6 @@ int main()
 
 void Derivare2(ArbNod* oper)
 {
-    cout << "C" << oper->info << '\n';
     if (!(oper->HasChildren()))
     {
          oper->info = DerivareIndiv(oper->info);
@@ -165,17 +164,27 @@ void Derivare2(ArbNod* oper)
         *  f/g => (f`g - fg`)/g^2
         */
 
-        //cout << "A " << oper->info; cout << " " << IsConstant(oper->St) << " " << IsConstant(oper->Dr) << '\n';
+        cout << "A " << oper->info << " " << oper->St->info << " " << oper->Dr->info << '\n';
         //daca avem f(x)/c refacem ca f(x)*(1/c) sau daca avem c/f(x) refacem ca c*(1/f(x))
-        if (IsConstant(oper->Dr) && !IsConstant(oper->St) || !IsConstant(oper->Dr) && IsConstant(oper->St))
+        bool Bdr = IsConstant(oper->Dr);
+        bool Bst = IsConstant(oper->St);
+
+        if (Bdr && !Bst || !Bdr && Bst)
         {
             //cout << "Simple fr " << oper->St->info << " " << oper->Dr->info << '\n';
-            oper->info = "*";
-            ArbNod* drp = new ArbNod("/", new ArbNod("1"), oper->Dr);
-            oper->Dr = drp;
-            Derivare2(oper);
+            if (oper->Dr->info == "1" || oper->St->info == "1")
+            {
+
+            }
+            else {
+                oper->info = "*";
+                ArbNod* drp = new ArbNod("/", new ArbNod("1"), oper->Dr);
+                oper->Dr = drp;
+                Derivare2(oper);
+
+                return;
+            }
             
-            return;
         }
 
         ArbNod* f = new ArbNod("");
@@ -720,7 +729,7 @@ string postfixare(string expresie)
     }
     // se aplica regulile de construire de la while anterior doar ca aparent am scris invers cele 2 conditii
     while (!stiva.empty()) {
-        cout << stivaPostfixata.size();
+        
         if (stivaPostfixata.size() > 1) {
             ArbNod* dr = new ArbNod("");
             if (!stivaPostfixata.empty() && stivaPostfixata.top() == "temp") {
@@ -767,7 +776,8 @@ string postfixare(string expresie)
             ArbNod* newNod = new ArbNod(
                 string(1, stiva.top()),
                 new ArbNod(stivaPostfixata.top()),
-                ArbNod::Temp
+                ArbNod::Temp,
+                false
             );
             cout << "new L1 node " << stiva.top() << " " << stivaPostfixata.top() << " " << ArbNod::Temp->info << '\n';
             stivaPostfixata.pop();
@@ -908,7 +918,7 @@ string simplificare(string rezultat)
 }
 bool debug(string expr)
 {
-    if (expr.size() == 1 and expr[0] == variabila[0])
+    if (expr.size() == 1 and expr == variabila)
     {
         fout << 1;
         return 1;
@@ -933,7 +943,9 @@ bool IsVariable(string s)
 }
 bool IsConstant(ArbNod* oper, int c) 
 {
-    if (c == 0) ConstHelper = true;
+    if (c == 0) {
+        ConstHelper = true;
+    }
 
     if (IsVariable(oper->info)) {
         ConstHelper = false;
