@@ -1,2 +1,2 @@
-ln(sin(x))+x^2
+ln(sin(x+1))
 x

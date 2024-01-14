@@ -1,0 +1,7 @@
+Expresia matematica este: x*((x/2)^4)
+Variabila pentru care se va deriva este: x
+Expresia este citita in Arbore astfel: x*((x/2)^4)
+Expresia nesimplificata: x*((x/2)^4)
+Derivata nesimplificata: 1*((x/2)^4)+x*(4*((x/2)^3))
+Derivata simplificata: ((x/2)^4)+x*(4*((x/2)^3))
+Derivata de gradul 2: 1*(4*((x/2)^3))+1*(4*((x/2)^3))+x*(4*(3*((x/2)^2)))

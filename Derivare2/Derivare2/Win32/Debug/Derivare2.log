@@ -1,0 +1,125 @@
+﻿  ArboreBInar.cpp
+  Derivare2.cpp
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(832,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(846,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(895,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(915,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(928,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(944,27): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1015): warning C4715: 'IsConstant': not all control paths return a value
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1035): warning C4715: 'MaxArbDepth': not all control paths return a value
+graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__CreateFontA@56 referenced in function "void __cdecl set_font(struct WindowData *)" (?set_font@@YAXPAUWindowData@@@Z)
+graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__GetCurrentPositionEx@8 referenced in function _outtext
+graphics.lib(misc.obj) : error LNK2001: unresolved external symbol __imp__GetCurrentPositionEx@8
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__GetCurrentPositionEx@8
+graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__GetTextExtentPoint32A@16 referenced in function _textheight
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__SelectObject@8
+graphics.lib(text.obj) : error LNK2001: unresolved external symbol __imp__SelectObject@8
+graphics.lib(misc.obj) : error LNK2001: unresolved external symbol __imp__SelectObject@8
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__SelectObject@8
+graphics.lib(winbgi.obj) : error LNK2001: unresolved external symbol __imp__SelectObject@8
+graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__SetTextAlign@8 referenced in function "void __cdecl set_align(struct WindowData *)" (?set_align@@YAXPAUWindowData@@@Z)
+graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__TextOutA@20 referenced in function _outtext
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__TextOutA@20
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__CreateBitmap@20 referenced in function _setfillpattern
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__CreateHatchBrush@8 referenced in function _setfillstyle
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__CreatePatternBrush@4 referenced in function _setfillpattern
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__CreateRectRgn@16 referenced in function _setviewport
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__CreateRectRgn@16
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__CreateSolidBrush@4 referenced in function _setfillstyle
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__CreateSolidBrush@4
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__DeleteObject@4
+graphics.lib(misc.obj) : error LNK2001: unresolved external symbol __imp__DeleteObject@4
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__DeleteObject@4
+graphics.lib(winbgi.obj) : error LNK2001: unresolved external symbol __imp__DeleteObject@4
+graphics.lib(dibutil.obj) : error LNK2001: unresolved external symbol __imp__DeleteObject@4
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__GetPixel@12 referenced in function _getpixel
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__SelectClipRgn@8 referenced in function _setviewport
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__SelectClipRgn@8
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__SetBkColor@8 referenced in function _setbkcolor
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__SetROP2@8 referenced in function _setwritemode
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__SetTextColor@8 referenced in function _setcolor
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__SetTextColor@8
+graphics.lib(winbgi.obj) : error LNK2001: unresolved external symbol __imp__SetTextColor@8
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__ExtCreatePen@20 referenced in function "void __cdecl CreateNewPen(void)" (?CreateNewPen@@YAXXZ)
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__MoveToEx@16 referenced in function _moverel
+graphics.lib(drawing.obj) : error LNK2001: unresolved external symbol __imp__MoveToEx@16
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__SetViewportOrgEx@16 referenced in function _setviewport
+graphics.lib(misc.obj) : error LNK2019: unresolved external symbol __imp__GetSystemMetrics@4 referenced in function _getmaxheight
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__GetSystemMetrics@4
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Arc@36 referenced in function _arc
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__BitBlt@36 referenced in function _getimage
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__BitBlt@36
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__CreateCompatibleBitmap@12 referenced in function _getimage
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__CreateCompatibleBitmap@12
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__CreateCompatibleDC@4 referenced in function _getimage
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__CreateCompatibleDC@4
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__DeleteDC@4 referenced in function _getimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Ellipse@20 referenced in function _fillellipse
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__FloodFill@16 referenced in function _floodfill
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetBitmapBits@12 referenced in function _getimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetClipRgn@8 referenced in function _cleardevice
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetCurrentObject@8 referenced in function _bar
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetDeviceCaps@8 referenced in function _printimage
+graphics.lib(dibutil.obj) : error LNK2001: unresolved external symbol __imp__GetDeviceCaps@8
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__LineTo@12 referenced in function _line
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Pie@36 referenced in function _pieslice
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Rectangle@20 referenced in function _bar3d
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__SetBitmapBits@12 referenced in function _putimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__SetPixelV@16 referenced in function _putpixel
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__StretchBlt@44 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__StartDocA@8 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__EndDoc@4 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__StartPage@4 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__EndPage@4 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetObjectA@12 referenced in function _getimage
+graphics.lib(dibutil.obj) : error LNK2001: unresolved external symbol __imp__GetObjectA@12
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__DPtoLP@12 referenced in function _cleardevice
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__DPtoLP@12
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__LPtoDP@12 referenced in function "void __cdecl RefreshWindow(struct tagRECT *)" (?RefreshWindow@@YAXPAUtagRECT@@@Z)
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Polygon@12 referenced in function _fillpoly
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__Polyline@12 referenced in function _bar3d
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__InvalidateRect@12 referenced in function "void __cdecl RefreshWindow(struct tagRECT *)" (?RefreshWindow@@YAXPAUtagRECT@@@Z)
+graphics.lib(winbgi.obj) : error LNK2001: unresolved external symbol __imp__InvalidateRect@12
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__FillRect@12 referenced in function _bar
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetWindowLongA@8 referenced in function "struct WindowData * __cdecl BGI__GetWindowDataPtr(struct HWND__ *)" (?BGI__GetWindowDataPtr@@YAPAUWindowData@@PAUHWND__@@@Z)
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__CreateStreamOnHGlobal@12 referenced in function "struct IPicture * __cdecl readipicture(char const *)" (?readipicture@@YAPAUIPicture@@PBD@Z)
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetOpenFileNameA@4 referenced in function _readimagefile
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__GetSaveFileNameA@4 referenced in function _writeimagefile
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__PrintDlgA@4 referenced in function _printimage
+graphics.lib(drawing.obj) : error LNK2019: unresolved external symbol __imp__OleLoadPicture@20 referenced in function "struct IPicture * __cdecl readipicture(char const *)" (?readipicture@@YAPAUIPicture@@PBD@Z)
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__GetStockObject@4 referenced in function "int __cdecl registerWindowClass(void)" (?registerWindowClass@@YAHXZ)
+graphics.lib(dibutil.obj) : error LNK2001: unresolved external symbol __imp__GetStockObject@4
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__GetStockObject@4
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__SendMessageA@16 referenced in function _closegraph
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__UnregisterClassA@8 referenced in function "void __cdecl unregisterWindowClass(void)" (?unregisterWindowClass@@YAXXZ)
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__RegisterClassExA@4 referenced in function "int __cdecl registerWindowClass(void)" (?registerWindowClass@@YAHXZ)
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__MessageBoxA@16 referenced in function _showerrorbox
+graphics.lib(winbgi.obj) : error LNK2019: unresolved external symbol __imp__LoadCursorA@8 referenced in function "int __cdecl registerWindowClass(void)" (?registerWindowClass@@YAHXZ)
+graphics.lib(file.obj) : error LNK2001: unresolved external symbol __imp__LoadCursorA@8
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__CreateDIBitmap@24 referenced in function "struct HBITMAP__ * __cdecl DIBToBitmap(void *,struct HPALETTE__ *)" (?DIBToBitmap@@YAPAUHBITMAP__@@PAXPAUHPALETTE__@@@Z)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__CreatePalette@4 referenced in function "struct HPALETTE__ * __cdecl CreateDIBPalette(void *)" (?CreateDIBPalette@@YAPAUHPALETTE__@@PAX@Z)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__GetDIBits@28 referenced in function "void * __cdecl AllocRoomForDIB(struct tagBITMAPINFOHEADER,struct HBITMAP__ *)" (?AllocRoomForDIB@@YAPAXUtagBITMAPINFOHEADER@@PAUHBITMAP__@@@Z)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__GetSystemPaletteEntries@16 referenced in function "struct HPALETTE__ * __cdecl GetSystemPalette(void)" (?GetSystemPalette@@YAPAUHPALETTE__@@XZ)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__RealizePalette@4 referenced in function "void * __cdecl BitmapToDIB(struct HBITMAP__ *,struct HPALETTE__ *)" (?BitmapToDIB@@YAPAXPAUHBITMAP__@@PAUHPALETTE__@@@Z)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__SelectPalette@12 referenced in function "void * __cdecl BitmapToDIB(struct HBITMAP__ *,struct HPALETTE__ *)" (?BitmapToDIB@@YAPAXPAUHBITMAP__@@PAUHPALETTE__@@@Z)
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__GetDC@4 referenced in function "void * __cdecl AllocRoomForDIB(struct tagBITMAPINFOHEADER,struct HBITMAP__ *)" (?AllocRoomForDIB@@YAPAXUtagBITMAPINFOHEADER@@PAUHBITMAP__@@@Z)
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__GetDC@4
+graphics.lib(dibutil.obj) : error LNK2019: unresolved external symbol __imp__ReleaseDC@8 referenced in function "void * __cdecl AllocRoomForDIB(struct tagBITMAPINFOHEADER,struct HBITMAP__ *)" (?AllocRoomForDIB@@YAPAXUtagBITMAPINFOHEADER@@PAUHBITMAP__@@@Z)
+graphics.lib(winthread.obj) : error LNK2001: unresolved external symbol __imp__ReleaseDC@8
+graphics.lib(file.obj) : error LNK2019: unresolved external symbol __imp__SetCursor@4 referenced in function "void * __cdecl LoadDIB(char const *)" (?LoadDIB@@YAPAXPBD@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__GetMessageA@16 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__TranslateMessage@4 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__DispatchMessageA@4 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__DefWindowProcA@16 referenced in function "long __stdcall WndProc(struct HWND__ *,unsigned int,unsigned int,long)" (?WndProc@@YGJPAUHWND__@@IIJ@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__PostQuitMessage@4 referenced in function "void __cdecl cls_OnDestroy(struct HWND__ *)" (?cls_OnDestroy@@YAXPAUHWND__@@@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__CreateWindowExA@48 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__ShowWindow@8 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__GetSystemMenu@8 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__AppendMenuA@16 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__UpdateWindow@4 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__BeginPaint@8 referenced in function "void __cdecl cls_OnPaint(struct HWND__ *)" (?cls_OnPaint@@YAXPAUHWND__@@@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__EndPaint@8 referenced in function "void __cdecl cls_OnPaint(struct HWND__ *)" (?cls_OnPaint@@YAXPAUHWND__@@@Z)
+graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__SetWindowLongA@12 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
+C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Win32\Debug\Derivare2.exe : fatal error LNK1120: 83 unresolved externals
