@@ -1,14 +1,15 @@
 ﻿  Derivare3.cpp
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(833,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(847,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(896,23): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(916,23): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(929,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(945,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1060,9): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1067,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1086,26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1090,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1016): warning C4715: 'IsConstant': not all control paths return a value
-C:\Users\Bogdan S\source\repos\Derivare3\Derivare3\Derivare3.cpp(1036): warning C4715: 'MaxArbDepth': not all control paths return a value
-  Derivare3.vcxproj -> C:\Users\Bogdan S\source\repos\Derivare3\Debug\Derivare3.exe
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(833,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(847,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(896,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(916,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(936,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1008,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1026,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1141,9): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1148,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1167,26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1171,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1097): warning C4715: 'IsConstant': not all control paths return a value
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1117): warning C4715: 'MaxArbDepth': not all control paths return a value
+  Derivare3.vcxproj -> C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Debug\Derivare3.exe

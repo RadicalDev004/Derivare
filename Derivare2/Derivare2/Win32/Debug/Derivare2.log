@@ -1,14 +1,14 @@
 ﻿  ArboreBInar.cpp
   Derivare2.cpp
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(832,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(846,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(895,23): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(915,23): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(928,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(944,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(832,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(846,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(895,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(915,23): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(928,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(944,27): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1015): warning C4715: 'IsConstant': not all control paths return a value
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1035): warning C4715: 'MaxArbDepth': not all control paths return a value
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1015): warning C4715: 'IsConstant': not all control paths return a value
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Derivare2\Derivare2.cpp(1035): warning C4715: 'MaxArbDepth': not all control paths return a value
 graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__CreateFontA@56 referenced in function "void __cdecl set_font(struct WindowData *)" (?set_font@@YAXPAUWindowData@@@Z)
 graphics.lib(text.obj) : error LNK2019: unresolved external symbol __imp__GetCurrentPositionEx@8 referenced in function _outtext
 graphics.lib(misc.obj) : error LNK2001: unresolved external symbol __imp__GetCurrentPositionEx@8
@@ -122,4 +122,4 @@ graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__U
 graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__BeginPaint@8 referenced in function "void __cdecl cls_OnPaint(struct HWND__ *)" (?cls_OnPaint@@YAXPAUHWND__@@@Z)
 graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__EndPaint@8 referenced in function "void __cdecl cls_OnPaint(struct HWND__ *)" (?cls_OnPaint@@YAXPAUHWND__@@@Z)
 graphics.lib(winthread.obj) : error LNK2019: unresolved external symbol __imp__SetWindowLongA@12 referenced in function "unsigned long __stdcall BGI__ThreadInitWindow(void *)" (?BGI__ThreadInitWindow@@YGKPAX@Z)
-C:\Users\Bogdan S\OneDrive\Documents\GitHub\Derivare\Derivare2\Win32\Debug\Derivare2.exe : fatal error LNK1120: 83 unresolved externals
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare2\Win32\Debug\Derivare2.exe : fatal error LNK1120: 83 unresolved externals

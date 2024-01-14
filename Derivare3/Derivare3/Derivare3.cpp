@@ -923,17 +923,98 @@ void simplificare1(string& rezultat)
     }
     rezultat = Rez2;
 }
+void simplificareParanteze1(string& rezultat)
+{
+    string rez;
+    string rez2;
+    int j=0;
+    int c = 0, k=0;
+    bool v = true;
+    bool c2 = true;
+    while (true)
+    {
+        for (int i = 0; i < rezultat.size(); i++)
+        {
+            if (rezultat[i] == '(')
+            {
+                j = i + 1;
+                while (rezultat[j] != ')')
+                {
+                    if (!(rezultat[j] == '+' and rezultat[j] == '-' and rezultat[j] == ')'))
+                    {
+                        c++;
+                    }
+                    else
+                    {
+                        c = 0;
+                        v = false;
+                        break;
+                    }
+                    j++;
+                }
+                if (v == true)
+                {
+                    while (c)
+                    {
+                        c--;
+                        i++;
+                        rez += rezultat[i];
+                        c2 = true;
+                    }
+                }
+                else
+                {
+                    c = 0;
+                    v = true;
+                }
+            }
+            if (c2 == true)
+            {
+                i = j + 1;
+                c2 = false;
+            }
+            rez += rezultat[i];
+        }
+        if (k == 0)
+        {
+            rez2 = rez;
+            rezultat = rez;
+            rez.clear();
+            k++;
+        }
+        else
+        {
+            if (rez2 == rez)
+            {
+                rezultat = rez;
+                break;
+            }
+            else
+            {
+                rez2 = rez;
+                rezultat = rez;
+                rez.clear();
+            }
+        }
+
+    }
+    rezultat[rezultat.size() - 1] = ' ';
+ 
+}
 string simplificare(string rezultat)
 {
     string DerivataSimplificata;
+
     for (int i = expresie.size(); i < DerivataNesimplificata.size(); i++)
     {
         DerivataSimplificata += DerivataNesimplificata[i];
     }
-
+    
     simplificare0(DerivataSimplificata);
     simplificare1(DerivataSimplificata);
     simplificareparanteze(DerivataSimplificata);
+    simplificareParanteze1(DerivataSimplificata);
+
 
     return DerivataSimplificata;
 }
