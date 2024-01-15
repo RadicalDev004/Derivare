@@ -4,12 +4,19 @@ C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(847,2
 C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(896,23): warning C4018: '<=': signed/unsigned mismatch
 C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(916,23): warning C4018: '<=': signed/unsigned mismatch
 C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(936,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1008,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1026,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1141,9): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1148,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1167,26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1171,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1097): warning C4715: 'IsConstant': not all control paths return a value
-C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1117): warning C4715: 'MaxArbDepth': not all control paths return a value
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1009,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1027,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1142,9): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1149,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1168,26): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1172,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1098): warning C4715: 'IsConstant': not all control paths return a value
+C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Derivare3\Derivare3.cpp(1118): warning C4715: 'MaxArbDepth': not all control paths return a value
+graphics.lib(dibutil.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(dibutil.obj)' or at ''; linking object as if no debug info
+graphics.lib(drawing.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(drawing.obj)' or at ''; linking object as if no debug info
+graphics.lib(file.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(file.obj)' or at ''; linking object as if no debug info
+graphics.lib(misc.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(misc.obj)' or at ''; linking object as if no debug info
+graphics.lib(text.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(text.obj)' or at ''; linking object as if no debug info
+graphics.lib(winbgi.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winbgi.obj)' or at ''; linking object as if no debug info
+graphics.lib(winthread.obj) : warning LNK4099: PDB '' was not found with 'graphics.lib(winthread.obj)' or at ''; linking object as if no debug info
   Derivare3.vcxproj -> C:\Users\dogib\Documents\GitHub\Derivare\Derivare3\Debug\Derivare3.exe

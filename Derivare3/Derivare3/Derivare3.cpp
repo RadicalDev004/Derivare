@@ -940,7 +940,7 @@ void simplificareParanteze1(string& rezultat)
                 j = i + 1;
                 while (rezultat[j] != ')')
                 {
-                    if (!(rezultat[j] == '+' and rezultat[j] == '-' and rezultat[j] == ')'))
+                    if (!(rezultat[j] == '+' or rezultat[j] == '-' or rezultat[j] == ')'))
                     {
                         c++;
                     }
@@ -973,6 +973,7 @@ void simplificareParanteze1(string& rezultat)
                 i = j + 1;
                 c2 = false;
             }
+
             rez += rezultat[i];
         }
         if (k == 0)
@@ -998,7 +999,7 @@ void simplificareParanteze1(string& rezultat)
         }
 
     }
-    rezultat[rezultat.size() - 1] = ' ';
+   
  
 }
 string simplificare(string rezultat)
@@ -1013,7 +1014,7 @@ string simplificare(string rezultat)
     simplificare0(DerivataSimplificata);
     simplificare1(DerivataSimplificata);
     simplificareparanteze(DerivataSimplificata);
-    simplificareParanteze1(DerivataSimplificata);
+   simplificareParanteze1(DerivataSimplificata);
 
 
     return DerivataSimplificata;

@@ -1,7 +1,7 @@
-Expresia matematica este: ln(sin(x))
+Expresia matematica este: (x^2)/(x+1)
 Variabila pentru care se va deriva este: x
-Expresia este citita in Arbore astfel: ln(sin(x))
-Expresia nesimplificata: ln(sin(x))
-Derivata nesimplificata: (1/(sin(x)))*((cos(x))*1)
-Derivata simplificata: 1/sinx*cosx 
-Derivata de gradul 2: ((0*(sin(x))-1*((cos(x))*1))/((sin(x))^2))*((cos(x))*1)+(1/(sin(x)))*(((-sinx)*1)*1)
+Expresia este citita in Arbore astfel: (x^2)/(x+1)
+Expresia nesimplificata: (x^2)/(x+1)
+Derivata nesimplificata: ((2*(x^1))*(x+1)-(x^2)*(1+0))/((x+1)^2)
+Derivata simplificata: (2*x*(x+1)-x^2*1)/((x+1)^2)
+Derivata de gradul 2: (((2*(1*(x^0)))*(x+1)+(2*(x^1))*(1+0)-(2*(x^1))*(1+0))*((x+1)^2)-((2*(x^1))*(x+1)-(x^2)*(1+0))*(2*((x+1)^1)))/(((x+1)^2)^2)
