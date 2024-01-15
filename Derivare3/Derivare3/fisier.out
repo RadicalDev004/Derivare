@@ -1,7 +1,7 @@
-Expresia matematica este: (x^2)/(x+1)
+Expresia matematica este: (x*5)^3+x*6
 Variabila pentru care se va deriva este: x
-Expresia este citita in Arbore astfel: (x^2)/(x+1)
-Expresia nesimplificata: (x^2)/(x+1)
-Derivata nesimplificata: ((2*(x^1))*(x+1)-(x^2)*(1+0))/((x+1)^2)
-Derivata simplificata: (2*x*(x+1)-x^2*1)/((x+1)^2)
-Derivata de gradul 2: (((2*(1*(x^0)))*(x+1)+(2*(x^1))*(1+0)-(2*(x^1))*(1+0))*((x+1)^2)-((2*(x^1))*(x+1)-(x^2)*(1+0))*(2*((x+1)^1)))/(((x+1)^2)^2)
+Expresia este citita in Arbore astfel: (x*5)^3+x*6
+Expresia nesimplificata: (x*5)^3+x*6
+Derivata nesimplificata: (1*5)*(3*((x*5)^2))+1*6
+Derivata simplificata: 15*(x*5)^2+6
+Derivata de gradul 2: (1*5)*(3*((1*5)*(2*((x*5)^1))))+106

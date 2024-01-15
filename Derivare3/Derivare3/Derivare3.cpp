@@ -130,11 +130,26 @@ void Derivare2(ArbNod* oper)
             a--;
             oper->Dr->info = to_string(stoi((oper->Dr->info)) - 1);
 
-            ArbNod* copy = new ArbNod(oper);
-            oper->Dr = copy;
-            oper->St = new ArbNod(copy->Dr);
-            oper->St->info = to_string(stoi((copy->Dr->info)) + 1);
+            if (!oper->St->HasChildren() && oper->St->info != variabila)
+                oper->St->info = "0";
+
+            ArbNod* n = new ArbNod("");
+            ArbNod::Copy(n, oper->St);
+
+            ArbNod* copy = new ArbNod("");
+            ArbNod::Copy(copy, oper);
+
+            ArbNod* DR = new ArbNod("*");
+            DR->Dr = copy;
+            DR->St = new ArbNod(copy->Dr);
+            DR->St->info = to_string(stoi((copy->Dr->info)) + 1);
+
+            oper->Dr = DR;
+            oper->St = n;           
+            
             oper->info = '*';
+
+            Derivare2(n);
         }
         else if (IsConstant(oper->St) && !IsConstant(oper->Dr))
         {
@@ -1217,5 +1232,4 @@ void displayCenteredText(int centerX, int centerY, string text) {
     // Display text at centered position
     outtextxy(x, y, &text[0]);
 }
-
 
